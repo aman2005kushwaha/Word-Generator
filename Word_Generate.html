@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WORD MIND — Know It. Explain It. Own It.</title>
+<style>
+:root{--bg:#0b1020;--sf:#141b36;--sf2:#1b2447;--tx:#fff;--mu:#9aa5c8;--ac:#4f8bff;--vi:#8b5cf6;--bd:#26305a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",sans-serif;padding-bottom:100px}
+main,header{max-width:640px;margin:0 auto;padding:0 16px}
+header{padding-top:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-weight:800;letter-spacing:.18em;background:linear-gradient(90deg,var(--ac),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+#pg{flex:1;max-width:190px;font-size:.72rem;color:var(--mu);text-align:right}
+.bar{height:6px;background:var(--sf2);border-radius:3px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--vi));transition:width .5s}
+.tag{color:var(--mu);font-size:.8rem;margin:2px 0 0}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:20px;margin-top:16px;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{padding:4px 12px;border-radius:99px;font-size:.78rem;border:1px solid var(--bd);color:var(--mu);background:transparent;font-family:inherit}
+.d1{color:#6ee7b7;border-color:#6ee7b7}.d2{color:#7fb0ff;border-color:#7fb0ff}.d3{color:#c4a8ff;border-color:#c4a8ff}
+.word{font-size:clamp(2.3rem,12vw,4rem);font-weight:800;text-align:center;line-height:1.1;margin:22px 0;background:linear-gradient(90deg,#fff,#b8c8ff);-webkit-background-clip:text;background-clip:text;color:transparent;overflow-wrap:anywhere}
+.word.sm{font-size:clamp(1.8rem,9vw,2.6rem);margin:14px 0}
+.timer{font-size:3rem;font-weight:700;text-align:center;font-variant-numeric:tabular-nums}
+.row{display:flex;gap:10px;margin-top:12px}.row>*{flex:1}
+.btn,.btnc{min-height:48px;cursor:pointer;color:var(--tx);font:inherit}
+.btn{border:0;border-radius:14px;font-weight:700;width:100%;margin-top:12px;background:linear-gradient(135deg,var(--ac),var(--vi))}
+.row .btn{margin-top:0}
+.btn.g{background:var(--sf2);border:1px solid var(--bd)}
+.btn.r{background:#7f1d1d}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btnc.on,.li.on,.sc button.on,nav button.on{border-color:var(--ac);color:#fff;background:rgba(79,139,255,.18)}
+.pts{color:var(--mu);padding-left:20px;margin:16px 0 0}.pts li{margin:4px 0}
+.d{margin-top:14px}.d b{color:var(--ac);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}.d p{margin:2px 0 0}
+.sc{display:grid;gap:8px;margin-top:10px}
+.sc button{min-height:48px;text-align:left;padding:8px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--sf2);color:var(--mu);font:inherit;cursor:pointer}
+.sc b{color:#fff;margin-right:8px}
+textarea{width:100%;margin-top:12px;border-radius:12px;border:1px solid var(--bd);background:var(--sf2);color:#fff;padding:10px;font:inherit}
+h2,h3{margin:20px 0 4px}.mu,small{color:var(--mu)}
+.li{display:flex;flex-direction:column;width:100%;text-align:left;margin-top:10px;padding:14px 16px;min-height:56px;border-radius:14px;border:1px solid var(--bd);background:var(--sf);color:#fff;font:inherit;cursor:pointer}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.st{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px}.st span{display:block;font-size:.75rem;color:var(--mu)}.st b{font-size:1.4rem}
+.st.w{grid-column:1/-1}.st.w b{font-size:1.05rem}
+.rc{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}.rc small{display:block}.rc em{font-style:normal;font-weight:700;color:var(--ac)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lnk{background:none;border:0;color:#fff;font:inherit;text-align:left;cursor:pointer;min-height:44px;flex:1}.lnk small{display:block}
+.card.s{padding:12px 16px;margin-top:10px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--sf);border-top:1px solid var(--bd);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;min-height:52px;border:1px solid transparent;border-radius:12px;background:none;color:var(--mu);font:inherit;font-size:.75rem;cursor:pointer}
+nav span{display:block;font-size:1.2rem}
+</style></head><body>
+<header><div class="top"><div class="logo">WORD MIND</div><div id="pg"></div></div><p class="tag">Know It. Explain It. Own It.</p></header>
+<main id="m"></main>
+<nav><button data-a="tab" data-v="home"><span>◉</span>Home</button><button data-a="tab" data-v="cats"><span>▦</span>Categories</button><button data-a="tab" data-v="prog"><span>▲</span>Progress</button><button data-a="tab" data-v="saved"><span>♥</span>Saved</button></nav>
+<script>
+const CATS=["Psychology and Human Behavior","Critical Thinking and Logic","Business and Economics","Technology and Artificial Intelligence","Communication and Social Intelligence","Philosophy and Big Ideas","Everyday English and Professional Vocabulary","World Affairs and General Knowledge"];
+const DIF=["","Beginner","Intermediate","Advanced"];
+const SC=["I had no idea.","I guessed the meaning.","I understood part of it.","I explained it reasonably well.","I explained it clearly with a good example.","I explained it confidently, accurately, and in my own words."];
+const W=[
+{w:"Confirmation Bias",c:0,d:2,m:"The habit of looking for, noticing and remembering information that supports what you already believe, while ignoring evidence against it.",h:"पुष्टि पूर्वाग्रह — अपनी पहले से बनी सोच को सही साबित करने वाली बातें ही ढूँढना और मानना, और उसके ख़िलाफ़ सबूत को नज़रअंदाज़ करना।",e:"Someone who thinks a brand is bad reads only the negative reviews and skips the good ones.",s:"He fell for confirmation bias and read only the articles that agreed with him.",x:"It is not lying or plain stubbornness. It happens unconsciously, even in honest people.",y:"It lets you test your own thinking before big decisions about money, jobs or people.",q:"Pick one belief you hold strongly. What evidence would change your mind?"},
+{w:"Cognitive Dissonance",c:0,d:3,m:"The mental discomfort you feel when your beliefs and your actions, or two of your beliefs, contradict each other.",h:"संज्ञानात्मक असंगति — जब हमारी सोच और हमारे काम में टकराव हो, तो मन में जो बेचैनी होती है।",e:"A person who values health keeps smoking, then tells himself “one cigarette won’t matter” to ease the discomfort.",s:"Buying the expensive phone caused dissonance because he had promised himself he would save.",x:"It is not just guilt. It is the clash itself, and people often resolve it by changing the story instead of the behaviour.",y:"It explains why people defend bad choices, and helps you spot it in yourself and act honestly.",q:"Where do your actions and your stated values not match right now?"},
+{w:"Fallacy",c:1,d:1,m:"A mistake in reasoning that makes an argument look convincing when it is actually weak or invalid.",h:"तर्क-दोष (भ्रांति) — तर्क में ऐसी गलती जो दलील को मज़बूत दिखाती है, पर असल में वह कमज़ोर होती है।",e:"“Everyone is buying this, so it must be good.” Popularity does not prove quality.",s:"Attacking the speaker instead of the argument is a common fallacy.",x:"A fallacy is bad reasoning, not a false fact. A conclusion can still be true even if the reasoning for it was fallacious.",y:"It helps you catch weak arguments in ads, politics and debates, and in your own thinking.",q:"Which fallacy do you see most often in advertisements?"},
+{w:"Falsifiability",c:1,d:3,m:"A claim is falsifiable if it is possible, at least in principle, to show it wrong with evidence. Philosopher Karl Popper made this idea famous.",h:"खंडन-योग्यता — किसी दावे को सबूत के आधार पर गलत साबित किया जा सकना।",e:"“It will rain tomorrow” can be tested. “Everything happens for a reason” can never be shown wrong, so it is not falsifiable.",s:"A claim that no evidence could ever disprove is not falsifiable.",x:"Falsifiable does not mean false. It means testable.",y:"It separates ideas that can be checked from claims that only sound deep.",q:"Name one belief of yours that no evidence could ever disprove."},
+{w:"Opportunity Cost",c:2,d:2,m:"The value of the next-best option you give up when you make a choice.",h:"अवसर लागत — एक चीज़ चुनने पर जिस अगले सबसे अच्छे विकल्प को छोड़ना पड़ता है, उसका मूल्य।",e:"Spending Sunday gaming costs you the study or paid work you could have done in those hours.",s:"The opportunity cost of watching TV all evening was a finished project.",x:"It is not only money spent. It is what you give up, and it applies to time too.",y:"Every choice has a hidden price. Seeing it leads to better decisions with time and money.",q:"What was the opportunity cost of your last hour on your phone?"},
+{w:"Inflation",c:2,d:1,m:"A general rise in prices over time, which means each unit of money buys less.",h:"मुद्रास्फीति (महँगाई) — समय के साथ चीज़ों के दाम बढ़ना, जिससे उतने ही पैसों में कम सामान आता है।",e:"A tea that cost ₹10 a few years ago costs ₹15 now, so your ₹100 buys less than before.",s:"Inflation made groceries more expensive this year.",x:"Inflation is prices rising, not prices being high. Prices falling over time is deflation.",y:"Money sitting idle loses buying power, which matters for saving, investing and salary talks.",q:"If prices rise 6% a year and your salary stays the same, what happens to your real income?"},
+{w:"Algorithm",c:3,d:1,m:"A step-by-step set of instructions for solving a problem or completing a task.",h:"एल्गोरिदम — किसी समस्या को हल करने के क्रमबद्ध चरणों का समूह।",e:"A recipe is an algorithm. So is the method a map app uses to find the shortest route.",s:"The app’s algorithm decides which videos appear first.",x:"An algorithm is the method. Code is one way of writing it down. Not every algorithm is “AI”.",y:"It helps you understand why feeds, searches and recommendations show what they show.",q:"Write the algorithm for making tea in five steps."},
+{w:"Hallucination",c:3,d:2,m:"When an AI system produces confident-sounding information that is false or made up.",h:"एआई का भ्रम (हैलुसिनेशन) — जब एआई आत्मविश्वास से ऐसी जानकारी दे दे जो असल में गलत या मनगढ़ंत हो।",e:"A chatbot cites a book or a court case that does not exist.",s:"Always verify AI answers, because hallucination can produce fake sources.",x:"It is different from the medical meaning (seeing things that are not there). The AI is not lying on purpose; it cannot tell its output is wrong.",y:"It reminds you to check AI claims against reliable sources before trusting them.",q:"How would you verify a fact an AI gave you?"},
+{w:"Empathy",c:4,d:1,m:"The ability to understand what another person feels by seeing things from their point of view.",h:"समानुभूति — दूसरे की जगह खुद को रखकर उसकी भावनाओं को समझना।",e:"A friend fails an exam. Instead of giving advice, you say “that must be really hard” and listen.",s:"Her empathy made the nervous new employee feel welcome.",x:"Sympathy is feeling sorry for someone. Empathy is understanding what it is like for them.",y:"It improves relationships, teamwork, selling and leadership.",q:"When did someone last truly understand you, and what did they do?"},
+{w:"Rapport",c:4,d:2,m:"A comfortable, trusting connection between people in which they feel understood and at ease. Pronounced “ra-POR”.",h:"आपसी तालमेल — दो लोगों के बीच भरोसे और सहजता का रिश्ता।",e:"A salesperson who asks about your needs and remembers your name builds rapport before selling anything.",s:"He built rapport with the client by listening first.",x:"It is not flattery or fake friendliness. It comes from genuine attention.",y:"People buy from, hire and cooperate with those they trust.",q:"What are three ways to build rapport with a stranger in two minutes?"},
+{w:"Paradox",c:5,d:2,m:"A statement or situation that seems contradictory or impossible but may still be true or reveal a deeper truth.",h:"विरोधाभास — ऐसी बात जो सुनने में खुद का खंडन करती लगे, फिर भी सच हो सकती है या गहरी सच्चाई दिखाए।",e:"The harder you try to fall asleep, the more awake you often stay.",s:"It is a paradox that rest can sometimes make you more productive.",x:"A paradox is not simply an error. A real paradox makes you rethink your assumptions.",y:"It trains you to hold two ideas at once instead of rushing to simple answers.",q:"Can you name a paradox from your own daily life?"},
+{w:"Epistemology",c:5,d:3,m:"The branch of philosophy that studies knowledge: what we can know, how we know it, and what makes a belief justified.",h:"ज्ञान-मीमांसा — दर्शन की वह शाखा जो ज्ञान का अध्ययन करती है: हम क्या जान सकते हैं, कैसे जानते हैं, और किसी बात को सही कैसे मानें।",e:"Asking “How do I know this news is true: from evidence, an expert, or just my feeling?” is an epistemological question.",s:"Epistemology asks what separates knowledge from a lucky guess.",x:"Do not mix it up with ontology (what exists) or etymology (where words come from).",y:"It sharpens how you judge sources and claims, which matters in an age of misinformation.",q:"Pick one thing you “know” and trace how you came to know it."},
+{w:"Prioritize",c:6,d:1,m:"To arrange tasks or goals by importance and deal with the most important first.",h:"प्राथमिकता तय करना — कामों को महत्व के क्रम में रखकर सबसे ज़रूरी काम पहले करना।",e:"With three deadlines this week, you start with the one that has the biggest consequence.",s:"You must prioritize important tasks over routine ones.",x:"Urgent is not the same as important. A ringing phone is urgent but may not matter.",y:"Time is limited, so results depend on what you choose to do first.",q:"Rank tomorrow’s tasks. What did you decide not to do?"},
+{w:"Nuance",c:6,d:2,m:"A subtle difference in meaning, tone or detail. Seeing nuance means not treating things as only black or white.",h:"बारीकी (सूक्ष्म भेद) — अर्थ, भाव या स्थिति में हल्का-सा फ़र्क, जो चीज़ों को सिर्फ़ काला-सफ़ेद मानने से रोकता है।",e:"“He is wrong” is simple. “He is right about the cost but wrong about the timing” shows nuance.",s:"The report captured the nuance of a complex issue.",x:"Nuance is not indecision. You can take a stand and still see the details.",y:"It leads to fairer judgments and fewer arguments caused by oversimplifying.",q:"Take an opinion you hold strongly. What part of it is not so simple?"},
+{w:"Diplomacy",c:7,d:1,m:"Managing relations between countries through talks and negotiation. It also means handling people with tact.",h:"कूटनीति — देशों के बीच बातचीत और समझौते से संबंध संभालने की कला; साथ ही लोगों से शिष्टता और समझदारी से पेश आना।",e:"Two countries disagree over trade rules, so officials negotiate instead of escalating.",s:"Quiet diplomacy helped end the trade dispute.",x:"Diplomacy is not weakness or lying. It is the tool of talks; foreign policy is the overall set of goals.",y:"It helps you follow world news, and handle disagreements at work without damaging relationships.",q:"How could diplomacy help you in a disagreement at work?"},
+{w:"Sovereignty",c:7,d:3,m:"The supreme authority of a state to govern itself and its territory without outside control.",h:"संप्रभुता — किसी राष्ट्र का अपने क्षेत्र और शासन पर सर्वोच्च, स्वतंत्र अधिकार, बिना बाहरी दखल के।",e:"A country makes its own laws and decides its own defence policy.",s:"Countries try to protect their sovereignty when signing international agreements.",x:"Sovereignty is about legal authority, not size or strength. Small countries are sovereign too. It is also not the same as democracy.",y:"It is key to understanding news about borders, treaties and the UN.",q:"When a country joins a treaty, does it give up some sovereignty? Argue both sides."}
+];
+const K="wordmind_v1",D=()=>({hist:[],fav:[],seen:[],cat:-1,cur:null,dur:120});
+let S=D();
+try{Object.assign(S,JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+let tab="home",phase="idle",left=S.dur,tick=null,score=-1,note="",open=null;
+const $=id=>document.getElementById(id),cw=()=>W.find(x=>x.w===S.cur);
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+const dk=d=>d.toLocaleDateString("en-CA");
+function stop(){clearInterval(tick);tick=null}
+function run(){if(tick)return;if(left<=0)left=S.dur;tick=setInterval(()=>{left--;if(left<=0){stop();try{navigator.vibrate&&navigator.vibrate(300)}catch(e){}}upd()},1000);upd()}
+function upd(){const t=$("t");if(t)t.textContent=fmt(left);const b=$("tb");if(b)b.textContent=tick?"Pause timer":(left<=0?"Time’s up — restart":"Start timer")}
+function idle(){phase="idle";score=-1;note="";stop();left=S.dur}
+function pick(){
+ const pool=W.filter(x=>S.cat<0||x.c===S.cat);
+ let f=pool.filter(x=>!S.seen.includes(x.w));
+ if(!f.length){S.seen=S.seen.filter(w=>!pool.some(x=>x.w===w));f=pool.filter(x=>x.w!==S.cur)}
+ if(!f.length)f=pool;
+ const x=f[Math.floor(Math.random()*f.length)];
+ S.cur=x.w;S.seen.push(x.w);save();phase="ready";score=-1;note="";stop();left=S.dur;
+}
+const det=x=>[["Simple meaning",x.m],["Meaning in Hindi",x.h],["Real-life example",x.e],["Example sentence",x.s],["Common confusion",x.x],["Why it matters",x.y],["Challenge yourself",x.q]].map(([k,v])=>`<div class="d"><b>${k}</b><p>${v}</p></div>`).join("");
+const tags=x=>`<div class="tags"><span class="chip">${CATS[x.c]}</span><span class="chip d${x.d}">${DIF[x.d]}</span></div>`;
+function home(){
+ if(phase==="idle"){const n=W.filter(y=>S.cat<0||y.c===S.cat).length;return `<div class="card" style="text-align:center"><div class="tags"><span class="chip">${S.cat<0?"All categories":CATS[S.cat]}</span></div><div class="word sm" style="margin:28px 0 8px">Ready?</div><p class="mu" style="margin:0">${n} words in this pool. The word stays hidden until you generate it.</p><button class="btn" data-a="new" style="margin-top:24px">Generate Random Word</button></div>`}
+ const x=cw(),fav=S.fav.includes(x.w);
+ if(phase==="revealed")return `<div class="card">${tags(x)}<div class="word sm">${x.w}</div>${det(x)}</div>
+<div class="card"><h3 style="margin-top:0">How well did you explain it?</h3><div class="sc">${SC.map((t,i)=>`<button data-a="score" data-v="${i}" class="${score===i?"on":""}"><b>${i}</b>${t}</button>`).join("")}</div>
+<textarea id="nt" rows="2" placeholder="Optional personal note…">${esc(note)}</textarea>
+<div class="row"><button class="btn g" data-a="fav">${fav?"♥ Saved":"♡ Save word"}</button></div>
+<button class="btn" data-a="log" ${score<0?"disabled":""}>Log score &amp; continue</button>
+<button class="btn g" data-a="skip">Continue without logging</button></div>`;
+ return `<div class="card">${tags(x)}<div class="word">${x.w}</div>
+<div class="timer" id="t">${fmt(left)}</div>
+<div class="row">${[60,120,180].map(s=>`<button class="chip btnc ${S.dur===s?"on":""}" data-a="dur" data-v="${s}">${s/60} min</button>`).join("")}</div>
+<div class="row"><button class="btn g" id="tb" data-a="tmr">Start timer</button></div>
+${phase==="explaining"?`<ol class="pts"><li>What you think the word means</li><li>How it works, or why it matters</li><li>A real-life example</li><li>Where or how it can be used</li><li>Why understanding it is useful</li></ol><button class="btn" data-a="reveal">Reveal Meaning</button>`:`<button class="btn" data-a="start">Start Explaining</button>`}</div>
+<button class="btn g" data-a="new">Generate Random Word</button>`;
+}
+function cats(){
+ const it=(v,t,n)=>`<button class="li ${S.cat===v?"on":""}" data-a="cat" data-v="${v}"><b>${t}</b><small>${n}</small></button>`;
+ return `<h2>Categories</h2><p class="mu">Practise one subject, or mix everything.</p>`+it(-1,"All categories (random)",W.length+" words")+CATS.map((t,i)=>it(i,t,W.filter(x=>x.c===i).length+" words · "+S.hist.filter(h=>h.c===i).length+" attempts")).join("");
+}
+function last(){const l={};S.hist.forEach(x=>l[x.w]=x);return l}
+function wordHist(){
+ const m={};S.hist.forEach(x=>{const o=m[x.w]||(m[x.w]={w:x.w,n:0,best:0,last:0,t:0});o.n++;o.best=Math.max(o.best,x.sc);o.last=x.sc;o.t=x.t});
+ const a=Object.values(m).sort((p,q)=>q.t-p.t),ln=a.filter(o=>o.last>=3).length;
+ return `<h3>Word history</h3><p class="mu"><b style="color:#fff">${a.length}</b> word${a.length===1?"":"s"} attempted · <b style="color:#fff">${ln}</b> learned (latest score 3 or higher)</p>`+(a.length?a.map(o=>{const x=W.find(y=>y.w===o.w);return x?`<div class="card s"><div class="hd"><button class="lnk" data-a="open" data-v="${o.w}"><b>${o.w}</b><small>${o.n} attempt${o.n===1?"":"s"} · latest ${o.last}/5 · best ${o.best}/5 · ${new Date(o.t).toLocaleDateString()}</small></button><span class="chip ${o.last>=3?"d1":"d3"}">${o.last>=3?"Learned":"Revisit"}</span></div>${open===o.w?det(x):""}</div>`:""}).join(""):`<p class="mu">Words you log will be listed here.</p>`);
+}
+function prog(){
+ const h=S.hist,n=h.length,avg=n?(h.reduce((a,b)=>a+b.sc,0)/n).toFixed(1):"—",conf=h.filter(x=>x.sc>=4).length,by={};
+ h.forEach(x=>(by[x.c]=by[x.c]||[]).push(x.sc));
+ let best=null,bv=-1;for(const c in by){const a=by[c].reduce((p,q)=>p+q,0)/by[c].length;if(a>bv){bv=a;best=c}}
+ const days=[...new Set(h.map(x=>dk(new Date(x.t))))];let st=0,d=new Date();
+ if(!days.includes(dk(d)))d.setDate(d.getDate()-1);
+ while(days.includes(dk(d))){st++;d.setDate(d.getDate()-1)}
+ const l=last(),rev=Object.keys(l).filter(w=>l[w].sc<=2);
+ return `<h2>Progress</h2><div class="g2"><div class="st"><span>Words attempted</span><b>${n}</b></div><div class="st"><span>Explained confidently (4–5)</span><b>${conf}</b></div><div class="st"><span>Average score</span><b>${avg}</b></div><div class="st"><span>Learning streak</span><b>${days.length>=2?st+" day"+(st===1?"":"s"):"—"}</b></div><div class="st w"><span>Best-performing category</span><b>${best===null?"—":CATS[best]}</b></div></div>
+<h3>Recent attempts</h3>${n?h.slice(-8).reverse().map(x=>`<div class="rc"><span><b>${x.w}</b><small>${new Date(x.t).toLocaleDateString()}${x.note?" · "+esc(x.note):""}</small></span><em>${x.sc}/5</em></div>`).join(""):`<p class="mu">No attempts yet. Explain a word, then rate yourself honestly.</p>`}
+<h3>Words to revisit</h3><p class="mu">${rev.length?rev.join(", "):"None yet."}</p>
+${wordHist()}
+<button class="btn r" data-a="reset" style="margin-top:28px">Reset all progress</button>`;
+}
+function saved(){
+ const l=last(),rev=Object.keys(l).filter(w=>l[w].sc<=2);
+ const it=w=>{const x=W.find(y=>y.w===w);return x?`<div class="card s"><div class="hd"><button class="lnk" data-a="open" data-v="${w}"><b>${w}</b><small>${CATS[x.c]} · ${DIF[x.d]}</small></button><button class="chip btnc" data-a="fav" data-v="${w}">${S.fav.includes(w)?"♥":"♡"}</button></div>${open===w?det(x):""}</div>`:""};
+ return `<h2>Favorites</h2>${S.fav.length?S.fav.map(it).join(""):`<p class="mu">No saved words yet. Tap “Save word” after revealing a meaning.</p>`}<h2>Revisit (last score 0–2)</h2>${rev.length?rev.map(it).join(""):`<p class="mu">Nothing to revisit yet.</p>`}`;
+}
+function render(){
+ const n=new Set(S.hist.map(x=>x.w)).size;
+ $("pg").innerHTML=`${n}/${W.length} words attempted<div class="bar"><i style="width:${n/W.length*100}%"></i></div>`;
+ $("m").innerHTML={home,cats,prog,saved}[tab]();
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===tab));
+ upd();
+}
+function act(a,v){
+ if(a==="tab"){tab=v}
+ else if(a==="new"){pick()}
+ else if(a==="start"){phase="explaining";run()}
+ else if(a==="tmr"){tick?stop():run();upd();return}
+ else if(a==="dur"){if(!tick){S.dur=+v;left=S.dur;save()}}
+ else if(a==="reveal"){phase="revealed";stop()}
+ else if(a==="score"){score=+v}
+ else if(a==="fav"){const w=v||S.cur,i=S.fav.indexOf(w);i<0?S.fav.push(w):S.fav.splice(i,1);save()}
+ else if(a==="log"){if(score<0)return;S.hist.push({w:S.cur,c:cw().c,sc:score,note:note.trim(),t:Date.now()});save();idle()}
+ else if(a==="skip"){idle()}
+ else if(a==="cat"){S.cat=+v;save();idle();tab="home"}
+ else if(a==="open"){open=open===v?null:v}
+ else if(a==="reset"){if(!confirm("Delete all history, scores and saved words? This cannot be undone."))return;stop();S=D();save();open=null;tab="home";idle()}
+ render();
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b)act(b.dataset.a,b.dataset.v)});
+document.addEventListener("input",e=>{if(e.target.id==="nt")note=e.target.value});
+render();
+</script></body></html>
